@@ -4,7 +4,7 @@ var hhm = (function () {
         map, layer;
     
     var getMap = function () {
-        return map || new google.maps.Map(document.getElementById(elementId));
+        return map || new google.maps.Map(document.getElementById("heatmap"));
     };
     
     var getLayer = function () {
@@ -14,7 +14,7 @@ var hhm = (function () {
         });
     };
     
-    var initMap = function (elementId) {
+    var initMap = function () {
         map = getMap();
         map.setOptions({
             zoom: 2,
@@ -27,16 +27,15 @@ var hhm = (function () {
     };
     
     hhm.init = function (elementId) {
-        var noop;
         if (!google.maps.visualization.HeatmapLayer) {
             throw "Google Heatmaps failed to load";
         }
-        initMap(elementId);
+        initMap();
     };
     
     return hhm;
 })();
 
-$(function() {
+$(window).load(function(){
     hhm.init("heatmap");
 });

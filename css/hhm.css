@@ -1,3 +1,8 @@
 body {
     padding-top: 80px;
 }
+
+#heatmap {
+    width: 100%;
+    min-height: 500px;
+}
