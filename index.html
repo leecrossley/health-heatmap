@@ -24,10 +24,13 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Official Development Assistance for Health <b class="caret"></b></a>
+                    <a href="/" class="dropdown-toggle" data-toggle="dropdown">Official Development Assistance for Health <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Recipient countries</a></li>
-                        <li><a href="#">Donor countries</a></li>
+                        <li><a href="?country=recipient&commitment=1">Recipient countries - commitment</a></li>
+                        <li><a href="?country=recipient&disbursement=1">Recipient countries - disbursement</a></li>
+                        <li class="divider"></li>
+                        <li><a class="disabled" href="?country=donor&commitment=1">Donor countries - commitment</a></li>
+                        <li><a class="disabled" href="?country=donor&disbursement=1">Donor countries - disbursement</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -38,20 +41,15 @@
                 <div class="col-lg-12">
                     <h2>
                         Official Development Assistance for Health
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Recipient countries</button>
+                        <div class="btn-group dropdown-current" style="display:none;">
+                            <button type="button" class="current btn btn-primary"></button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Recipient countries</a></li>
-                                <li><a href="#">Donor countries</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Commitments</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Commitments</a></li>
-                                <li><a href="#">Disbursements</a></li>
+                                <li><a href="?country=recipient&commitment=1">Recipient countries - commitment</a></li>
+                                <li><a href="?country=recipient&disbursement=1">Recipient countries - disbursement</a></li>
+                                <li class="divider"></li>
+                                <li><a class="disabled" href="?country=donor&commitment=1">Donor countries - commitment</a></li>
+                                <li><a class="disabled" href="?country=donor&disbursement=1">Donor countries - disbursement</a></li>
                             </ul>
                         </div>
                         <small>(Million, 2009 US$)</small>
