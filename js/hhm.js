@@ -12,7 +12,7 @@ var hhm = (function () {
     
     var filename = function () {
         var country = $.QueryString["country"],
-            disbursement = $.QueryString["disbursement"]
+            disbursement = $.QueryString["disbursement"],
             name;
         if (country && country === "donor") {
             name = "Donor";
@@ -84,7 +84,7 @@ var hhm = (function () {
         getData();
     };
     
-    hhm.init = function (elementId) {
+    hhm.init = function () {
         if (!google.visualization) {
             throw "Google jsapi failed to load";
         }
