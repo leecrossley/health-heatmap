@@ -1,8 +1,25 @@
 body {
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 #heatmap {
     width: 100%;
     min-height: 500px;
+}
+
+.timeline {
+    margin: 15px 0 5px 0;
+}
+
+.timeline > div {
+    margin: 0;
+    padding: 0;
+}
+
+.timeline button {
+    width: 100%;
+}
+
+.timeline .progress {
+    margin-top: 1px;
 }

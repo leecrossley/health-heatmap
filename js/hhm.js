@@ -1,18 +1,6 @@
 var hhm = (function () {
     "use strict";
-    var hhm = {},
-        map, layer, longlat, code;
-    
-    var getMap = function () {
-        return map || new google.maps.Map(document.getElementById("heatmap"));
-    };
-    
-    var getLayer = function () {
-        return layer || new google.maps.visualization.HeatmapLayer({
-            map: map,
-            radius: 25
-        });
-    };
+    var hhm = {};
     
     var getLongLat = lambda.first(function (item) {
         return item.code === code;
@@ -43,20 +31,24 @@ var hhm = (function () {
     };
     
     var initMap = function () {
-        map = getMap();
-        map.setOptions({
-            zoom: 2,
-            center: new google.maps.LatLng(20, 0),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles: []
-        });
-        layer = getLayer();
-        getData();
+        var chart = new google.visualization.GeoChart(document.getElementById("heatmap"));
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+        
+        chart.draw(data);
     };
     
     hhm.init = function (elementId) {
-        if (!google.maps.visualization.HeatmapLayer) {
-            throw "Google Heatmaps failed to load";
+        if (!google.visualization) {
+            throw "Google jsapi failed to load";
         }
         initMap();
     };
