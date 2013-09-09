@@ -13,7 +13,7 @@ body {
 
 .timeline > div {
     margin: 0;
-    padding: 0;
+    padding: 0 10px 0 0;
 }
 
 .timeline button {
@@ -22,4 +22,10 @@ body {
 
 .timeline .progress {
     margin-top: 1px;
+}
+
+.legend {
+    position: absolute;
+    z-index: 9;
+    height: 50px;
 }
