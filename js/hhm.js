@@ -39,7 +39,7 @@ var hhm = (function () {
           ['United States', 300],
           ['Brazil', 400],
           ['Canada', 500],
-          ['France', 600],
+          ['AF', 1000],
           ['RU', 700]
         ]);
         
