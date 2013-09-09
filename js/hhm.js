@@ -14,6 +14,21 @@ var hhm = (function () {
         });
     };
     
+    var getValidData = lambda.select(function (item) {
+        if (item.GHO === "DEVICES01") {
+            return true;
+        }
+        return false;
+    });
+    
+    var getData = function () {
+        $.getJSON("/data/healthinfrastructure.json", function(data) {
+            var validData = getValidData(data);
+            console.log(validData);
+            //layer.setData(/* data */);
+        });
+    };
+    
     var initMap = function () {
         map = getMap();
         map.setOptions({
@@ -23,7 +38,7 @@ var hhm = (function () {
             styles: []
         });
         layer = getLayer();
-        //layer.setData(/* data */);
+        getData();
     };
     
     hhm.init = function (elementId) {
