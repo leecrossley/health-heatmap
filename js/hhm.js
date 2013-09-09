@@ -15,17 +15,23 @@ var hhm = (function () {
     };
     
     var getValidData = lambda.select(function (item) {
-        if (item.GHO === "DEVICES01") {
-            return true;
-        }
-        return false;
+        return item.GHO === "DEVICES01" && item.Numeric;
+    });
+    
+    var getMapData = lambda.map(function (item) {
+        return { 
+            location: new google.maps.LatLng(37.782, -122.447),
+            weight: parseFloat(item.Numeric, 10)
+        };
     });
     
     var getData = function () {
         $.getJSON("/data/healthinfrastructure.json", function(data) {
             var validData = getValidData(data);
             console.log(validData);
-            //layer.setData(/* data */);
+            var heatmapData = getMapData(validData);
+            console.log(heatmapData);
+            layer.setData(heatmapData);
         });
     };
     
