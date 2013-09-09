@@ -67,7 +67,9 @@ var hhm = (function () {
         $.getJSON("/data/" + filename() + ".json", function(data) {
             for (var i = 2000; i <= 2010; i++) {
                 year = i.toString();
-                var dataForYear = getDataForYear(data)[0];
+                var partitioned = getDataForYear(data);
+                var dataForYear = partitioned[0];
+                data = partitioned[1];
                 var mapData = getMapData(dataForYear);
                 mapData.unshift(["Country", "Amount"]);
                 dataset.push(mapData);
