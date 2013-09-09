@@ -28,9 +28,7 @@ var hhm = (function () {
     var getData = function () {
         $.getJSON("/data/healthinfrastructure.json", function(data) {
             var validData = getValidData(data);
-            console.log(validData);
             var heatmapData = getMapData(validData);
-            console.log(heatmapData);
             layer.setData(heatmapData);
         });
     };
