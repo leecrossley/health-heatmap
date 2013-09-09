@@ -36,3 +36,7 @@ var hhm = (function () {
     
     return hhm;
 })();
+
+$(function() {
+    hhm.init("heatmap");
+});
