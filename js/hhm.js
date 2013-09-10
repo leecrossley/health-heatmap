@@ -10,38 +10,19 @@ var hhm = (function () {
         return [item.country, parseFloat(item.value)];
     });
     
-    var filename = function () {
-        var country = $.QueryString["country"],
-            disbursement = $.QueryString["disbursement"],
-            name;
-        if (country && country === "donor") {
-            name = "Donor";
-        } else {
-            name = "Recipient";
-        }
-        if (disbursement) {
-            name = name + "-disbursement";
-        } else {
-            name = name + "-commitment";
-        }
-        $(".dropdown-current .current").text(name.replace("-", " countries - "));
-        $(".dropdown-current").show();
-        return name.toLowerCase();
-    };
-    
-    var nextYear = function (initial) {
-        if (!isPlaying && !initial) {
+    var nextYear = function () {
+        if (!isPlaying) {
             return;
         }
-        chart.draw(google.visualization.arrayToDataTable(dataset[current]));
+        chart.draw(dataset[current]);
         $(".year").text(current + 2000);
         $(".progress-bar").width(current * 10 + "%");
         if (current === 10) {
             current = 0;
         } else {
-            current++;
+            current = current + 1;
         }
-        if (!initial) {
+        if (isPlaying) {
             setTimeout(nextYear, 1500);
         }
     };
@@ -63,18 +44,43 @@ var hhm = (function () {
         });
     };
     
+    var preloadData = function () {
+        // "Preload" data to fix horrible Google bug
+        for (var i = dataset.length - 1; i >= 0; i--) {
+            chart.draw(dataset[i]);
+        }
+    };
+    
+    var filename = function () {
+        var country = $.QueryString["country"],
+            disbursement = $.QueryString["disbursement"],
+            name;
+        if (country && country === "donor") {
+            name = "Donor";
+        } else {
+            name = "Recipient";
+        }
+        if (disbursement) {
+            name = name + "-disbursement";
+        } else {
+            name = name + "-commitment";
+        }
+        $(".dropdown-current .current").text(name.replace("-", " countries - "));
+        $(".dropdown-current").show();
+        return name.toLowerCase();
+    };
+    
     var getData = function () {
         $.getJSON("/data/" + filename() + ".json", function(data) {
             for (var i = 2000; i <= 2010; i++) {
                 year = i.toString();
                 var partitioned = getDataForYear(data);
-                var dataForYear = partitioned[0];
+                var mapData = getMapData(partitioned[0]);
                 data = partitioned[1];
-                var mapData = getMapData(dataForYear);
                 mapData.unshift(["Country", "Amount"]);
-                dataset.push(mapData);
+                dataset.push(google.visualization.arrayToDataTable(mapData));
             }
-            nextYear(true);
+            preloadData();
             configurePlay();
         });
     };
